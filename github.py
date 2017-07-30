@@ -1,5 +1,6 @@
 import requests
-import constants
+
+GITHUB_API_URL = "https://api.github.com/graphql"
 
 QUERY = """
 query($repository_owner:String!, $repository_name: String!, $count: Int!) {
@@ -47,6 +48,6 @@ class Github:
                        "count": count
                    }}
         print "Requesting for", repository_name
-        response = requests.post(constants.GITHUB_API_URL, json=payload, headers=self.__request_headers())
+        response = requests.post(GITHUB_API_URL, json=payload, headers=self.__request_headers())
         print "Got status code for", repository_name, response.status_code
         return response.json()

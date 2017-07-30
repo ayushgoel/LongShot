@@ -46,6 +46,7 @@ class Github:
                        "repository_name": repository_name,
                        "count": count
                    }}
+        print "Requesting for", repository_name
         response = requests.post(constants.GITHUB_API_URL, json=payload, headers=self.__request_headers())
-        print response
-        return response
+        print "Got status code for", repository_name, response.status_code
+        return response.json()

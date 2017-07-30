@@ -51,7 +51,7 @@ class Github:
         return {"tags": tags,
                 "releases": releases}
 
-    def getTagsAndReleases(self, repository_owner, repository_name, count):
+    def get_tags_and_releases(self, repository_owner, repository_name, count):
         payload = {"query": QUERY,
                    "variables": {
                        "repository_owner": repository_owner,
@@ -61,4 +61,4 @@ class Github:
         print "Requesting for", repository_name
         response = requests.post(GITHUB_API_URL, json=payload, headers=self.__request_headers())
         print "Got status code for", repository_name, response.status_code
-        return response.json()
+        return self.__parse_tags_and_releases(response.json())

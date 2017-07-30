@@ -11,11 +11,8 @@ def main():
         tags, releases = g.get_tags_and_releases(repo["owner"], repo["name"], repositories.COUNT)
         print "Got", tags, releases
         unreleased_tags = tagsparser.find_unreleased_tags(tags, releases)
-        text = ""
-        for tag in tags:
-            if tag.version in unreleased_tags:
-                text += "No release for tag {0}, it can be found on {1}".format(tag.version, tag.URL)
-        flock.notify_group_about_missing_release_notes(text)
+        flockML = flock.create_flockML_for_tags(unreleased_tags)
+        flock.notify_group_about_missing_release_notes(flockML)
 
 
 if __name__ == '__main__':

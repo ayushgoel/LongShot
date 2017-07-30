@@ -3,26 +3,30 @@ import requests
 GITHUB_API_URL = "https://api.github.com/graphql"
 
 QUERY = """
-query($repository_owner:String!, $repository_name: String!, $count: Int!) {
-  repository(
-    owner: $repository_owner,
-    name: $repository_name) {
+query($repository_owner:String!,
+      $repository_name: String!,
+      $count: Int!) {
+  repository(owner: $repository_owner,
+             name: $repository_name) {
     
     refs(last: $count,refPrefix:"refs/tags/") {
-      edges {
-        node{
-          name
+      nodes {
+        name
+        target {
+          commitUrl
         }
       }
     }
     
     releases(last: $count) {
-      edges {
-        node {
+      nodes {
+        tag {
           name
+          prefix
         }
       }
     }
+
   }
 }
 """

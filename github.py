@@ -1,14 +1,6 @@
 import requests
 import constants
 
-# payload = "{\"query\": \"query($repository: String!) {repository(owner: \\\"talk-to\\\",name: $repository) " \
-#           "{refs(last: 10,refPrefix:\\\"refs/tags/\\\") {edges {node{name}}}}}\"," \
-#           "\"variables\": \"{\\\"repository\\\": \\\"Knock\\\"}\"\n\t\n}\n\n"
-#
-# response = requests.request("POST", url, data=payload, headers=headers)
-#
-# print(response.text)
-
 QUERY = """
 query($repository_owner:String!, $repository_name: String!, $count: Int!) {
   repository(

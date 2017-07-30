@@ -1,4 +1,6 @@
 import requests
+import tag
+import release
 
 GITHUB_API_URL = "https://api.github.com/graphql"
 
@@ -46,10 +48,9 @@ class Github:
 
     def __parse_tags_and_releases(self, response):
         repository = response["data"]["repository"]
-        tags = repository["refs"]["nodes"]
-        releases = repository["releases"]["nodes"]
-        return {"tags": tags,
-                "releases": releases}
+        tags = [tag.Tag(i) for i in repository["refs"]["nodes"]]
+        releases = [release.Release(i["tag"]) for i in repository["releases"]["nodes"]]
+        return (tags, releases)
 
     def get_tags_and_releases(self, repository_owner, repository_name, count):
         payload = {"query": QUERY,

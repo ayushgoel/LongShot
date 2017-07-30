@@ -9,7 +9,7 @@ query($repository_owner:String!,
   repository(owner: $repository_owner,
              name: $repository_name) {
     
-    refs(last: $count,refPrefix:"refs/tags/") {
+    refs(last: $count, refPrefix:"refs/tags/") {
       nodes {
         name
         target {

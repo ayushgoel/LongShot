@@ -1,3 +1,6 @@
+
+# Revisit later as not required right now.
+
 class Query:
     def __init__(self, scalar_name):
         self.scalar_name = scalar_name

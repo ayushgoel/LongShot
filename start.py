@@ -11,7 +11,7 @@ def main():
         tags, releases = g.get_tags_and_releases(repo["owner"], repo["name"], repositories.COUNT)
         print "Got", tags, releases
         unreleased_tags = tagsparser.find_unreleased_tags(tags, releases)
-        flockML = flock.create_flockML_for_tags(unreleased_tags)
+        flockML = flock.create_flockML_for_tags(repo["owner"], repo["name"], unreleased_tags)
         flock.notify_group_about_missing_release_notes(flockML)
 
 

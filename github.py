@@ -44,6 +44,13 @@ class Github:
     def __init__(self, token):
         self.token = token
 
+    def __parse_tags_and_releases(self, response):
+        repository = response["data"]["repository"]
+        tags = repository["refs"]["nodes"]
+        releases = repository["releases"]["nodes"]
+        return {"tags": tags,
+                "releases": releases}
+
     def getTagsAndReleases(self, repository_owner, repository_name, count):
         payload = {"query": QUERY,
                    "variables": {

@@ -31,8 +31,8 @@ query($repository_owner:String!,
 }
 """
 
-class Github:
 
+class Github:
     def __authorization_header(self):
         return "token " + self.token
 

@@ -3,6 +3,8 @@ import flock_constants
 
 
 def create_flockML_for_tags(repo_owner, repo_name, tags):
+    if not tags:
+        return None
     return "<flockml>" +\
            "({0}/{1}) missing release: <br/>".format(repo_owner, repo_name) +\
            "<br/>".join([i.flockML() for i in tags]) +\

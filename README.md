@@ -37,4 +37,4 @@ Ayush Goel, ayushgoel111@gmail.com
 License
 ---
 
-LongShot is available under the MIT license. See the [LICENSE][LICENSE] file for more info.
+LongShot is available under the MIT license. See the [LICENSE](LICENSE) file for more info.

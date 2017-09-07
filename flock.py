@@ -8,7 +8,7 @@ def create_flockML_for_tags(repo_owner, repo_name, tags):
     return "<flockml>" +\
            "({0}/{1}) missing release: <br/>".format(repo_owner, repo_name) +\
            "<br/>".join([i.flockML() for i in tags]) +\
-           "<flockml>"
+           "</flockml>"
 
 
 def notify_group_about_missing_release_notes(flockML):

@@ -8,7 +8,7 @@ import flock
 def main():
     g = github.Github(github_token.GITHUB_TOKEN)
     for repo in repositories.REPOSITORIES:
-        tags, releases = g.get_tags_and_releases(repo["owner"], repo["name"], repositories.COUNT)
+        tags, releases = g.get_tags_and_releases(repo["owner"], repo["name"], repositories.TAGS_COUNT, repositories.RELEASES_COUNT)
         print "Got", [t.version for t in tags], [r.version for r in releases]
         unreleased_tags = tagsparser.find_unreleased_tags(tags, releases)
         flockML = flock.create_flockML_for_tags(repo["owner"], repo["name"], unreleased_tags)

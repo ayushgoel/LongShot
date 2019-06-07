@@ -7,11 +7,12 @@ GITHUB_API_URL = "https://api.github.com/graphql"
 QUERY = """
 query($repository_owner:String!,
       $repository_name: String!,
-      $count: Int!) {
+      $tags_count: Int!,
+      $releases_count: Int!,) {
   repository(owner: $repository_owner,
              name: $repository_name) {
-    
-    refs(last: $count, refPrefix:"refs/tags/") {
+
+    refs(last: $tags_count, refPrefix:"refs/tags/") {
       nodes {
         name
         target {
@@ -19,8 +20,8 @@ query($repository_owner:String!,
         }
       }
     }
-    
-    releases(last: $count) {
+
+    releases(last: $releases_count) {
       nodes {
         tag {
           name
@@ -52,12 +53,13 @@ class Github:
         releases = [release.Release(i["tag"]) for i in repository["releases"]["nodes"]]
         return (tags, releases)
 
-    def get_tags_and_releases(self, repository_owner, repository_name, count):
+    def get_tags_and_releases(self, repository_owner, repository_name, tags_count, releases_count):
         payload = {"query": QUERY,
                    "variables": {
                        "repository_owner": repository_owner,
                        "repository_name": repository_name,
-                       "count": count
+                       "tags_count": tags_count,
+                       "releases_count": releases_count
                    }}
         print "Requesting for", repository_name
         response = requests.post(GITHUB_API_URL, json=payload, headers=self.__request_headers())
